@@ -1,0 +1,8 @@
+title: "Tips & Notes techniques — Lab"
+description: "Correctifs et retours d'expérience ponctuels — virtualisation, infrastructure, sécurité 🇨🇭"
+url: "https://doit4everyone.github.io"
+baseurl: "/tips-lab"
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
