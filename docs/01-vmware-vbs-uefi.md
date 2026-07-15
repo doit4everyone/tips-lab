@@ -1,15 +1,31 @@
 ---
-title: "VMware Workstation bloqué par VBS/UEFI — Guide de déblocage"
+title: "VMware Workstation bloqué par VBS/UEFI | DoIt4Everyone"
+description: "Débloquer la virtualisation imbriquée sur un PC Secured-core récent avec le DG Readiness Tool et le mécanisme SecConfig.efi."
 lang: fr
 ---
+<style>
+  header, footer { display: none !important; }
+  .wrapper {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    float: none !important;
+    position: relative !important;
+    padding: 40px 20px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 1.1em !important;
+  }
+  section {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+  h1, h2 { text-align: center; }
+  table { width: 100%; display: table; margin: 20px 0; }
+</style>
 
 # 🔓 VMware Workstation bloqué par VBS/UEFI
 
-**Débloquer la virtualisation imbriquée sur un PC Secured-core récent**
-
-[← Retour aux notes](../)
-
----
+> [← Retour à l'index](../)
 
 ## Le symptôme
 
@@ -106,8 +122,12 @@ Le fichier `ReadMe.txt` livré avec l'outil documente aussi une méthode pour ac
 | Piège à éviter | Se fier aux indicateurs WMI (`Win32_DeviceGuard`), souvent trompeurs en cours de manipulation |
 | Outil | Toujours en version 3.6 (juillet 2024), fiche Microsoft non mise à jour mais fonctionnel sur 24H2/Server 2025 |
 
-Si cet article vous a fait gagner les quatre heures qu'il m'a fallu pour arriver à cette conclusion, il aura rempli son rôle.
+Si cette note vous a fait gagner les quatre heures qu'il aura fallu pour arriver à cette conclusion, elle aura rempli son rôle.
 
 ---
 
-[← Retour aux notes](../)
+> ℹ️ *Testé sur Windows 11 24H2, Windows Server 2025, VMware Workstation Pro, DG Readiness Tool v3.6*
+
+---
+
+[← Retour à l'index](../)
