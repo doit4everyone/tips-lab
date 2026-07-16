@@ -57,6 +57,27 @@ Deux pièges classiques qui font perdre du temps à ce stade :
 
 ---
 
+## D'abord, éliminez le cas simple : la méthode registre suffit-elle ?
+
+Le verrou UEFI n'est pas systématique : VBS peut être activé « with UEFI lock » ou « without UEFI lock » selon la configuration posée par l'OEM ou par GPO. Avant de sortir l'artillerie lourde, testez la méthode légère :
+
+```powershell
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "LsaCfgFlags" /t REG_DWORD /d 0 /f
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f
+```
+
+Redémarrez, puis vérifiez :
+
+```powershell
+Get-CimInstance -ClassName Win32_DeviceGuard -Namespace root\Microsoft\Windows\DeviceGuard | Select-Object VirtualizationBasedSecurityStatus
+```
+
+Si vous obtenez `0`, c'est réglé, vous n'êtes pas dans le cas verrouillé, inutile d'aller plus loin.
+
+**Si `VirtualizationBasedSecurityStatus` reste à `2` malgré un registre entièrement remis à zéro et un reboot**, c'est la signature exacte du verrou UEFI : la configuration Windows dit « désactivé », mais le firmware réimpose VBS à chaque démarrage, en dehors de tout contrôle logiciel. C'est uniquement dans ce cas de figure que la suite de cette note s'applique.
+
+---
+
 ## La solution : le DG Readiness Tool, et une confirmation physique au boot
 
 L'outil officiel Microsoft pour ce cas précis s'appelle **Device Guard and Credential Guard hardware readiness tool** (`DG_Readiness_Tool.ps1`), toujours en version 3.6 au moment d'écrire ces lignes, disponible sur le Download Center de Microsoft. Sa fiche annonce une compatibilité Windows 10 / Server 2016, mais il reste la référence fonctionnelle pour désactiver VBS sur Windows 11 24H2 et Windows Server 2025 : le mécanisme qu'il actionne (la variable EFI) n'a pas changé.
